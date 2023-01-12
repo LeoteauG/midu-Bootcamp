@@ -26,6 +26,15 @@ const Clicksused = () =>{
         useClicks(clicks + 1)
     }
    
+    const Reset = () =>{
+        useClick({
+            ...click,
+            clickleft: 0,
+            clickright: 0
+        })
+        useClicks(0)
+    }
+
     return(
         <>
             {click.clickleft}
@@ -33,6 +42,9 @@ const Clicksused = () =>{
             <button onClick = {CambioClickRight}>Right</button>
             {click.clickright}
             <p>{clicks}</p>
+            <button onClick = {Reset}>
+                Resetear
+            </button>
         </>
     )
 }

@@ -9,7 +9,9 @@ const App = () => {
       <Header title = "'Half Stack application development'"/>
       <Content/>
       <Total title = "Number of exercises"/>
+      <hr/>
       <Clicksused/>
+      <hr/>
     </div>
   )
 }
