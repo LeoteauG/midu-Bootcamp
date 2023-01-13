@@ -32,7 +32,6 @@ const Colection = () => {
                     </ul>
                 )
             })}
-            
         </div>
       )
 }

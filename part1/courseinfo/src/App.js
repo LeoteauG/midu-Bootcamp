@@ -2,7 +2,7 @@ import Header from "./components/Header"
 import Content from "./components/Content"
 import Total from "./components/Total"
 import Clicksused from "./components/State"
-import Colection from "./components/collection"
+import Colection from "./components/Collection"
 
 const App = () => {
   return (
