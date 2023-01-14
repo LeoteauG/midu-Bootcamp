@@ -35,7 +35,8 @@ const App = () => {
       return "No hay nada"
     }
 
-    const NotaCreada = (e) =>{
+    const NotaCreadaSubmit = (event) =>{
+      event.preventDefault()
       const Notes = {
         id: note.length + 1,
         content: newNote,
@@ -49,6 +50,7 @@ const App = () => {
     const NuevaNota = (e) =>{
       useNewnote(e.target.value)
     }
+    console.log(note)
   return (
     <div>
       <Header title = "'Half Stack application development'"/>
@@ -64,10 +66,11 @@ const App = () => {
           })
         } 
       </ol>
+        <form onSubmit={NotaCreadaSubmit}>
           <label>Nombre</label>
           <input onChange = {NuevaNota} type="text" value = {newNote}></input>
-          <button onClick={NotaCreada}>Enviar</button>
-        
+          <button>Enviar</button>
+        </form>
     </div>
   )
 }
