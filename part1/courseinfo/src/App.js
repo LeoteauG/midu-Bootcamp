@@ -5,7 +5,7 @@ import Clicksused from "./components/State"
 import {Collection} from "./components/Collection"
 import { useState } from "react"
 const App = () => {
-
+  
   const notes = [
     {
       id: 1,
@@ -27,10 +27,11 @@ const App = () => {
       important: true,
     },
     ]
-
-    const [note,useNote] = useState(notes)
+    
+    const [ver, useVer] = useState(true)
     const [newNote,useNewnote] = useState(' ')
-
+    const [note,useNote] = useState(notes)
+    
     if(notes.length === 0){
       return "No hay nada"
     }
@@ -45,26 +46,40 @@ const App = () => {
       }
       useNote([...note,Notes])
       useNewnote(' ')
+      
     }
-
+   
     const NuevaNota = (e) =>{
       useNewnote(e.target.value)
     }
-    console.log(note)
+    
+    const ShowAll = () => {
+      useVer(!ver)
+    }
+
   return (
     <div>
+      
       <Header title = "'Half Stack application development'"/>
       <Content/>
       <Total title = "Number of exercises"/>
       <hr/>
       <Clicksused/>
       <hr/>
+      
+      <button onClick = {ShowAll}>{ver ? "Hola mundo" : "Algo pasa"}</button>
       <ol>
         {
-          note.map((note) =>{
+          note
+          .filter((note) =>{
+            if(ver) return true                                                                                                                                                                            
+            return note.important === true 
+          })
+          .map((note) =>{
             return (<Collection {...note} key={note.id}/>)
           })
         } 
+        
       </ol>
         <form onSubmit={NotaCreadaSubmit}>
           <label>Nombre</label>
@@ -73,6 +88,7 @@ const App = () => {
         </form>
     </div>
   )
+  
 }
 
 export default App
