@@ -2,93 +2,20 @@ import Header from "./components/Header"
 import Content from "./components/Content"
 import Total from "./components/Total"
 import Clicksused from "./components/State"
-import {Collection} from "./components/Collection"
-import { useState } from "react"
-const App = () => {
-  
-  const notes = [
-    {
-      id: 1,
-      content: 'HTML is easy',
-      date: '2019-05-30T17:30:31.098Z',
-      important: true,
-      category: ["a","b"]
-    },
-    {
-      id: 2,
-      content: 'Browser can execute only JavaScript',
-      date: '2019-05-30T18:39:34.091Z',
-      important: false,
-    },
-    {
-      id: 3,
-      content: 'GET and POST are the most important methods of HTTP protocol',
-      date: '2019-05-30T19:20:14.298Z',
-      important: true,
-    },
-    ]
-    
-    const [ver, useVer] = useState(true)
-    const [newNote,useNewnote] = useState(' ')
-    const [note,useNote] = useState(notes)
-    
-    if(notes.length === 0){
-      return "No hay nada"
-    }
+import Informacion from "./components/Informacion"
 
-    const NotaCreadaSubmit = (event) =>{
-      event.preventDefault()
-      const Notes = {
-        id: note.length + 1,
-        content: newNote,
-        date: new Date().toISOString(),
-        important: Math.random < 0.5
-      }
-      useNote([...note,Notes])
-      useNewnote(' ')
-      
-    }
-   
-    const NuevaNota = (e) =>{
-      useNewnote(e.target.value)
-    }
-    
-    const ShowAll = () => {
-      useVer(!ver)
-    }
-
+export default function App (){
   return (
     <div>
-      
       <Header title = "'Half Stack application development'"/>
       <Content/>
       <Total title = "Number of exercises"/>
       <hr/>
       <Clicksused/>
       <hr/>
-      
-      <button onClick = {ShowAll}>{ver ? "Hola mundo" : "Algo pasa"}</button>
-      <ol>
-        {
-          note
-          .filter((note) =>{
-            if(ver) return true                                                                                                                                                                            
-            return note.important === true 
-          })
-          .map((note) =>{
-            return (<Collection {...note} key={note.id}/>)
-          })
-        } 
-        
-      </ol>
-        <form onSubmit={NotaCreadaSubmit}>
-          <label>Nombre</label>
-          <input onChange = {NuevaNota} type="text" value = {newNote}></input>
-          <button>Enviar</button>
-        </form>
+      <Informacion/>
     </div>
   )
   
 }
 
-export default App
