@@ -15,7 +15,5 @@ export default function App (){
       <hr/>
       <Informacion/>
     </div>
-  )
-  
-}
-
+    )
+  }
