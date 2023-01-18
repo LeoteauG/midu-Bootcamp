@@ -1,4 +1,10 @@
-const Notas = [
+const { json } = require('express')
+const express = require('express')
+const app = express()
+
+app.use(express.json())
+
+var Notas = [
       {
         "id": 1,
         "content": "Cambiando algo",
@@ -19,15 +25,72 @@ const Notas = [
       }
     ]
 
+    app.get('/',(req,res)=>{
+      res.send('<h1>Hola Mundo</h1>')
+    })
+
+    app.get('/notas',(req,res)=>{
+      res.json(Notas)
+    })
+
+    app.get('/notas/nota/:id',(req,res)=>{
+      const id = Number(req.params.id);
+      const notas = Notas.find((Notas)=>{
+        return(
+        Notas.id === id
+        )
+      })
+      if(notas)
+      {
+        res.json(notas)
+      }
+      else{
+        res.status(404).send("No existe ese id en nuestra base de datos")
+      }
+     })
+    
+    app.delete('/notas/nota/:id',(req,res) =>{
+      const id = Number(req.params.id)
+      Notas = Notas.filter((nota)=>{
+        return (
+          nota.id !== id
+        )
+      })
+      res.status(204).end()
+    })
+
+  app.post('/notas/nota',(req,res) =>{
+    const nota = req.body
+    const id = Notas.map(nota => nota.id)
+    const idMax = Math.max(...id)
+    const Nota = {
+      id: idMax + 1,
+      content: nota.content,
+      important: typeof(nota.important) !== 'undefined' ? nota.important : false,
+      date: new Date().toISOString()
+    }
+    if(!nota || !nota.content){
+      return res.status(400).send(
+        {
+          error: "No saldra nunca si no colocaste alguna nota :v"
+        }
+      )
+    }
+
+    Notas = [...Notas, Nota]
+    res.json(Nota)
+  })
+
+/*
 const http = require('http')
 
 const app = http.createServer((req,res)=>{
     res.writeHead(200,{'Content-Type':'application/json'})
     res.end("Hola brother")
 })
-
+*/
 
 const port = 3001
-app.listen(port)
-console.log(`se esta corriendo en el puerto ${port}`)
-
+app.listen(port,()=>{
+  console.log(`se esta corriendo en el puerto ${port}`)
+})
