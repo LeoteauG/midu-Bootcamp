@@ -84,14 +84,6 @@ app.post('/notas/nota', (req, res) => {
 app.use((req, res) => {
   res.status(404).send('Esta pagina no existe')
 })
-/*
-const http = require('http')
-
-const app = http.createServer((req,res)=>{
-    res.writeHead(200,{'Content-Type':'application/json'})
-    res.end("Hola brother")
-})
-*/
 
 const port = 3001
 app.listen(port, () => {
